@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../assets/fonts/inter.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@theme {
+    --font-inter : "Inter", "sans-serif"
+}
+
+body {
+    @apply font-inter;
+}
+
+html {
+    overflow-y: hidden;
+}
