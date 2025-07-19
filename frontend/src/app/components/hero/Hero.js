@@ -113,9 +113,13 @@ export default function VideoChat() {
           }
       }
     }
+    const [width,setWidth] = useState(null)
     useEffect(() => {
-      socketRef.current = io("http://localhost:6900");
+      socketRef.current = io("https://nitcmeet.onrender.com/");
       initialisePc();
+      if (typeof window !== 'undefined') {
+        setWidth(window.innerWidth);
+      }
       const socket = socketRef.current;
       socket.on('connect', () => {
         console.log('Connected with ID:', socket.id)
@@ -304,7 +308,7 @@ export default function VideoChat() {
                 <div className="text-center">
                     <video ref={remote} className='hidden h-screen w-screen'></video>
                   <div className="w-20 h-20 md:w-32 md:h-32 bg-gray-600 rounded-full flex items-center justify-center mb-4 mx-auto">
-                    <VideoOff size={window.innerWidth < 768 ? 32 : 48} className="text-gray-400"/>
+                    <VideoOff size={width < 768 ? 32 : 48} className="text-gray-400"/>
                   </div>
                   <p className="text-lg md:text-xl font-medium text-gray-400">No Connection</p>
                   <p className="text-gray-500 text-sm md:text-base">Press connect to start</p>
@@ -320,7 +324,7 @@ export default function VideoChat() {
                 ) : (
                   <div className="text-center">
                     <video className='hidden' ref={videRef} autoPlay></video>
-                    <VideoOff size={window.innerWidth < 768 ? 12 : 20} className="text-gray-400 mx-auto mb-1" />
+                    <VideoOff size={width < 768 ? 12 : 20} className="text-gray-400 mx-auto mb-1" />
                     <p className="text-xs text-gray-400 hidden md:block">Off</p>
                   </div>
                 )}
